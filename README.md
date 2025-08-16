@@ -1,12 +1,12 @@
 ===============================================================================
                                                                                
                    <div align="center">
-  <img src="billz-logo.jpg" alt="BILLZ Logo" width="300" />
+  <img src="billz-logo.png" alt="BILLZ Logo" width="300" />
 </div>
 
                                                                                
-                          BILLZ
-                Next-Gen Subscription Billing Platform
+                               BILLZ
+                  Next-Gen Subscription Billing Platform
                                                                                
    
                                                                                
@@ -14,9 +14,9 @@
 
 Streamline your subscription billing only with BILLZ! Manage customers, create subscriptions, generate invoices, and track payments with powerful real-time analytics.
 
-===============================================================================
+=================
 GETTING STARTED
-===============================================================================
+=================
 
 Sign Up/Log In: Use the auth pages to create an account and access the dashboard.
 
@@ -28,10 +28,9 @@ Payment Tracking: Record payments across multiple methods and monitor overdue ac
 
 BILLZ makes it simple to handle recurring billing, track revenue growth, and scale your SaaS business with comprehensive financial insights.
 
-===============================================================================
+===========
 FEATURES
-===============================================================================
-
+===========
 • Customer Management: Complete customer profiles with contact information, subscription history, and revenue tracking.
 
 • Subscription Management: Flexible billing cycles, trial periods, plan upgrades, and automated renewals with real-time status updates.
@@ -44,9 +43,9 @@ FEATURES
 
 • Supabase Integration: Full database persistence with real-time updates, secure authentication, and scalable infrastructure.
 
-===============================================================================
+=========
 USAGE
-===============================================================================
+=========
 
 1. Open BILLZ in your browser
 2. Add customers and set up subscription plans with custom billing cycles
@@ -54,9 +53,9 @@ USAGE
 4. Record payments and track transaction history across multiple payment methods
 5. Monitor business growth with real-time analytics and export comprehensive reports
 
-===============================================================================
+===============
 INSTALLATION
-===============================================================================
+===============
 
 Prerequisites:
 - Node.js 18+
@@ -167,9 +166,9 @@ CREATE TABLE payments (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
-===============================================================================
+=======================
 DEPLOYMENT (VERCEL)
-===============================================================================
+=======================
 
 Set these env vars in Vercel Project Settings:
 
@@ -180,9 +179,9 @@ JWT_SECRET
 
 Auth/Protected routes and the dashboard are configured with real-time database connections and dynamic content rendering.
 
-===============================================================================
+============
 TECH STACK
-===============================================================================
+============
 
 Node.js, Express.js
 Supabase (database & auth)
@@ -190,9 +189,9 @@ Chart.js (analytics visualization)
 Vanilla JavaScript, HTML5, CSS3
 Vercel (deployment)
 
-===============================================================================
+===============
 API ENDPOINTS
-===============================================================================
+===============
 
 Authentication:
 POST /api/auth/login
@@ -221,27 +220,14 @@ POST /api/payments
 Health Check:
 GET /api/health
 
-===============================================================================
-LOGO USAGE
-===============================================================================
 
-The BILLZ logo (Screenshot-2025-08-17-015453.jpg) features:
-- Purple "BILLZ" text on dark background
-- Modern, clean typography
-- Professional branding for subscription billing platform
-
-For web/markdown usage:
-- Place logo file in /assets/ or /public/ directory
-- Reference as: ![BILLZ Logo](assets/billz-logo.jpg)
-- Recommended display width: 200-300px
-
-===============================================================================
+=========
 SUPPORT
-===============================================================================
+=========
 
-For support, email srujanjadhav@example.com or open an issue on GitHub.
+For support, email srujanjadhav@gmai.com or open an issue on GitHub.
 
 Built with ❤️ by Srujan Jadhav
 ⭐ Star this repo if you found it helpful!
 
-===============================================================================
+===========================================================
