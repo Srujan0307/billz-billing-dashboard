@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BILLZ - Next-Gen Subscription Billing Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landingPage" class="page active">
+        <!-- Floating Geometric Shapes Animation -->
+        <div class="floating-shapes">
+            <div class="shape shape-circle shape-1"></div>
+            <div class="shape shape-triangle shape-2"></div>
+            <div class="shape shape-square shape-3"></div>
+            <div class="shape shape-circle shape-small shape-4"></div>
+            <div class="shape shape-triangle shape-medium shape-5"></div>
+            <div class="shape shape-square shape-large shape-6"></div>
+            <div class="shape shape-circle shape-7"></div>
+            <div class="shape shape-square shape-8"></div>
+        </div>
+
+        <!-- Navigation Header -->
+        <nav class="nav-header">
+            <div class="container">
+                <div class="nav-content">
+                    <div class="nav-brand">
+                        <h2 class="brand-logo">BILLZ</h2>
+                    </div>
+                    <div class="nav-links">
+                        <a href="#hero" class="nav-link">Home</a>
+                        <a href="#features" class="nav-link">Features</a>
+                        <a href="#stats" class="nav-link">Stats</a>
+                        <a href="#contact" class="nav-link">Contact</a>
+                    </div>
+                    <div class="nav-auth">
+                        <button class="btn btn--outline btn--sm" onclick="showLogin()">Login</button>
+                        <button class="btn btn--primary btn--sm" onclick="showSignup()">Sign Up Free</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">BILLZ - Next-Gen Subscription Billing Platform</h1>
+                    <p class="hero-subtitle">Streamline your recurring billing, track payments, and grow your SaaS business with powerful analytics</p>
+                    <div class="hero-actions">
+                        <button class="btn btn--primary btn--lg" onclick="showSignup()">Get Started Free</button>
+                        <button class="btn btn--outline btn--lg" onclick="showDashboard()">View Demo</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2 class="section-title">Powerful Features for Modern Billing</h2>
+                <div class="features-grid">
+                    <div class="feature-card reveal-on-scroll">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Customer Management</h3>
+                        <p>Complete customer profiles with contact information, subscription history, and payment tracking</p>
+                    </div>
+                    <div class="feature-card reveal-on-scroll">
+                        <div class="feature-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h3>Subscription Management</h3>
+                        <p>Flexible billing cycles, trial periods, plan upgrades, and automated renewals</p>
+                    </div>
+                    <div class="feature-card reveal-on-scroll">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <h3>Invoice & Payment Tracking</h3>
+                        <p>Automated invoice generation, payment recording, and overdue tracking</p>
+                    </div>
+                    <div class="feature-card reveal-on-scroll">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h3>Advanced Analytics</h3>
+                        <p>Revenue insights, churn analysis, and comprehensive business reports</p>
+                    </div>
+                    <div class="feature-card reveal-on-scroll">
+                        <div class="feature-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>API Integration</h3>
+                        <p>RESTful APIs for seamless integration with your existing systems</p>
+                    </div>
+                    <div class="feature-card reveal-on-scroll">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Security & Compliance</h3>
+                        <p>Enterprise-grade security with PCI compliance and data protection</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section id="stats" class="stats-section">
+            <div class="container">
+                <h2 class="section-title">Trusted by Growing Businesses</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="10000000">0</div>
+                        <div class="stat-label">Transactions Processed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="99.9">0</div>
+                        <div class="stat-label">% Uptime</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="500">0</div>
+                        <div class="stat-label">+ Happy Customers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="24">0</div>
+                        <div class="stat-label">/7 Support</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <h3>BILLZ</h3>
+                        <p>Next-Gen Subscription Billing Platform</p>
+                    </div>
+                    <div class="footer-links">
+                        <div class="footer-column">
+                            <h4>Product</h4>
+                            <a href="#">Features</a>
+                            <a href="#">Pricing</a>
+                            <a href="#">API</a>
+                        </div>
+                        <div class="footer-column">
+                            <h4>Company</h4>
+                            <a href="#">About</a>
+                            <a href="#">Contact</a>
+                            <a href="#">Careers</a>
+                        </div>
+                        <div class="footer-column">
+                            <h4>Support</h4>
+                            <a href="#">Documentation</a>
+                            <a href="#">Help Center</a>
+                            <a href="#">Status</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 BILLZ. All rights reserved. Srujan Jadhav</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Welcome Back</h2>
+                <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="rememberMe">
+                            Remember me
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full">Login</button>
+                </form>
+                <div class="auth-footer">
+                    <p>Don't have an account? <a href="#" onclick="switchToSignup()">Sign up</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Get Started Free</h2>
+                <span class="close" onclick="closeModal('signupModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="signupForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="signupName">Full Name</label>
+                        <input type="text" id="signupName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupEmail">Email</label>
+                        <input type="email" id="signupEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupCompany">Company (Optional)</label>
+                        <input type="text" id="signupCompany">
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="acceptTerms" required>
+                            I agree to the Terms of Service and Privacy Policy
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full">Create Account</button>
+                </form>
+                <div class="auth-footer">
+                    <p>Already have an account? <a href="#" onclick="switchToLogin()">Login</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboardPage" class="page">
+        <div class="dashboard-container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <h2 class="sidebar-brand">BILLZ</h2>
+                </div>
+                <nav class="sidebar-nav">
+                    <a href="#" class="nav-item active" onclick="showDashboardSection('overview')">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="showDashboardSection('customers')">
+                        <i class="fas fa-users"></i>
+                        <span>Customers</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="showDashboardSection('subscriptions')">
+                        <i class="fas fa-sync-alt"></i>
+                        <span>Subscriptions</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="showDashboardSection('invoices')">
+                        <i class="fas fa-file-invoice"></i>
+                        <span>Invoices</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="showDashboardSection('payments')">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Payments</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="showDashboardSection('reports')">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Reports</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Dashboard Overview -->
+                <div id="overview" class="dashboard-section active">
+                    <div class="section-header">
+                        <h1>Dashboard Overview</h1>
+                        <p>Welcome back! Here's what's happening with your billing.</p>
+                    </div>
+                    
+                    <!-- Key Metrics -->
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="metric-content">
+                                <div class="metric-value">5</div>
+                                <div class="metric-label">Total Customers</div>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
+                            <div class="metric-content">
+                                <div class="metric-value">4</div>
+                                <div class="metric-label">Active Subscriptions</div>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="metric-content">
+                                <div class="metric-value">$506</div>
+                                <div class="metric-label">Monthly Revenue</div>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="metric-content">
+                                <div class="metric-value">$219</div>
+                                <div class="metric-label">Overdue Amount</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts -->
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <h3>Revenue Trend</h3>
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                        <div class="chart-card">
+                            <h3>Subscription Status</h3>
+                            <canvas id="subscriptionChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="recent-activity">
+                        <h3>Recent Activity</h3>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-plus"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <div class="activity-title">New customer added</div>
+                                    <div class="activity-time">2 hours ago</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Payment received from TechCorp</div>
+                                    <div class="activity-time">4 hours ago</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-file-invoice"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Invoice generated for StartupFlow</div>
+                                    <div class="activity-time">1 day ago</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customers Section -->
+                <div id="customers" class="dashboard-section">
+                    <div class="section-header">
+                        <h1>Customer Management</h1>
+                        <button class="btn btn--primary" onclick="openCustomerModal()">
+                            <i class="fas fa-plus"></i> Add Customer
+                        </button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Company</th>
+                                    <th>Status</th>
+                                    <th>Revenue</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="customersTableBody">
+                                <!-- Dynamic content will be inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Subscriptions Section -->
+                <div id="subscriptions" class="dashboard-section">
+                    <div class="section-header">
+                        <h1>Subscription Management</h1>
+                        <button class="btn btn--primary" onclick="openSubscriptionModal()">
+                            <i class="fas fa-plus"></i> Create Subscription
+                        </button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>Plan</th>
+                                    <th>Amount</th>
+                                    <th>Billing Cycle</th>
+                                    <th>Status</th>
+                                    <th>Next Billing</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="subscriptionsTableBody">
+                                <!-- Dynamic content will be inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Invoices Section -->
+                <div id="invoices" class="dashboard-section">
+                    <div class="section-header">
+                        <h1>Invoice Management</h1>
+                        <button class="btn btn--primary" onclick="openInvoiceModal()">
+                            <i class="fas fa-plus"></i> Create Invoice
+                        </button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Invoice #</th>
+                                    <th>Customer</th>
+                                    <th>Amount</th>
+                                    <th>Due Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="invoicesTableBody">
+                                <!-- Dynamic content will be inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Payments Section -->
+                <div id="payments" class="dashboard-section">
+                    <div class="section-header">
+                        <h1>Payment Tracking</h1>
+                        <button class="btn btn--primary" onclick="openPaymentModal()">
+                            <i class="fas fa-plus"></i> Record Payment
+                        </button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>Amount</th>
+                                    <th>Method</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Reference</th>
+                                </tr>
+                            </thead>
+                            <tbody id="paymentsTableBody">
+                                <!-- Dynamic content will be inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Reports Section -->
+                <div id="reports" class="dashboard-section">
+                    <div class="section-header">
+                        <h1>Reports & Analytics</h1>
+                    </div>
+                    
+                    <div class="reports-grid">
+                        <div class="report-card">
+                            <h3>Revenue Analytics</h3>
+                            <canvas id="revenueReportChart"></canvas>
+                        </div>
+                        <div class="report-card">
+                            <h3>Customer Growth</h3>
+                            <canvas id="customerGrowthChart"></canvas>
+                        </div>
+                        <div class="report-card">
+                            <h3>Overdue Invoices</h3>
+                            <div id="overdueInvoicesList">
+                                <!-- Dynamic content -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Customer Modal -->
+    <div id="customerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="customerModalTitle">Add New Customer</h2>
+                <span class="close" onclick="closeModal('customerModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="customerForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customerName">Full Name *</label>
+                            <input type="text" id="customerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerEmail">Email *</label>
+                            <input type="email" id="customerEmail" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerCompany">Company</label>
+                        <input type="text" id="customerCompany">
+                    </div>
+                    <div class="form-group">
+                        <label for="customerStreet">Street Address</label>
+                        <input type="text" id="customerStreet">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customerCity">City</label>
+                            <input type="text" id="customerCity">
+                        </div>
+                        <div class="form-group">
+                            <label for="customerState">State</label>
+                            <input type="text" id="customerState">
+                        </div>
+                        <div class="form-group">
+                            <label for="customerZip">ZIP Code</label>
+                            <input type="text" id="customerZip">
+                        </div>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn--outline" onclick="closeModal('customerModal')">Cancel</button>
+                        <button type="submit" class="btn btn--primary">Save Customer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Subscription Modal -->
+    <div id="subscriptionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create Subscription</h2>
+                <span class="close" onclick="closeModal('subscriptionModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="subscriptionForm">
+                    <div class="form-group">
+                        <label for="subscriptionCustomer">Customer *</label>
+                        <select id="subscriptionCustomer" required>
+                            <option value="">Select Customer</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="subscriptionPlan">Plan *</label>
+                            <select id="subscriptionPlan" required>
+                                <option value="">Select Plan</option>
+                                <option value="Basic" data-price="29">Basic - $29/month</option>
+                                <option value="Pro" data-price="79">Pro - $79/month</option>
+                                <option value="Enterprise" data-price="199">Enterprise - $199/month</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="subscriptionCycle">Billing Cycle *</label>
+                            <select id="subscriptionCycle" required>
+                                <option value="monthly">Monthly</option>
+                                <option value="quarterly">Quarterly</option>
+                                <option value="yearly">Yearly</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="subscriptionStartDate">Start Date *</label>
+                            <input type="date" id="subscriptionStartDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subscriptionAmount">Amount *</label>
+                            <input type="number" id="subscriptionAmount" step="0.01" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="subscriptionTrial">
+                            Start with trial period
+                        </label>
+                    </div>
+                    <div id="trialFields" style="display: none;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="trialStart">Trial Start</label>
+                                <input type="date" id="trialStart">
+                            </div>
+                            <div class="form-group">
+                                <label for="trialEnd">Trial End</label>
+                                <input type="date" id="trialEnd">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn--outline" onclick="closeModal('subscriptionModal')">Cancel</button>
+                        <button type="submit" class="btn btn--primary">Create Subscription</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications -->
+    <div id="notifications" class="notifications-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
