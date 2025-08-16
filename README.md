@@ -1,7 +1,9 @@
 <div align="center"> <img src="billz-logo.png" alt="BILLZ Logo" width="300" />
-BILLZ
-Next-Gen Subscription Billing Platform
+
 </div>
+
+                    BILLZ
+         Next-Gen Subscription Billing Platform
 
 Streamline your subscription billing only with BILLZ! Manage customers, create subscriptions, generate invoices, and track payments with powerful real-time analytics.
 
