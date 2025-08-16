@@ -1,293 +1,72 @@
-// BILLZ Application JavaScript
+// BILLZ Application JavaScript - Full Dynamic Version
+console.log('🚀 BILLZ App.js loaded - Full Dynamic Version 4.0');
+
+// Supabase Configuration
+const SUPABASE_URL = 'https://qqlshxvxeggabzybrbmr.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFxbHNoeHZ4ZWdnYWJ6eWJyYm1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUzNTQ5NzMsImV4cCI6MjA3MDkzMDk3M30.v4IBDujoFryUuXo1NDOnxBflj0qf1stb2xPA115DsX8';
 
 // Application State
 let currentUser = null;
 let currentSection = 'overview';
+let dashboardStats = {
+  totalCustomers: 0,
+  activeSubscriptions: 0,
+  monthlyRevenue: 0,
+  overdueAmount: 0
+};
 
 // Application Data
 const appData = {
-  customers: [
-    {
-      id: 1,
-      name: "TechCorp Solutions",
-      email: "billing@techcorp.com",
-      company: "TechCorp Inc",
-      address_street: "123 Tech Street",
-      address_city: "San Francisco",
-      address_state: "CA",
-      address_zip: "94105",
-      address_country: "USA",
-      status: "active",
-      created_at: "2024-01-15",
-      total_revenue: 2388
-    },
-    {
-      id: 2,
-      name: "Sarah Johnson",
-      email: "founder@startupflow.io",
-      company: "StartupFlow",
-      address_street: "456 Innovation Ave",
-      address_city: "Austin",
-      address_state: "TX",
-      address_zip: "78701",
-      address_country: "USA",
-      status: "active",
-      created_at: "2024-03-22",
-      total_revenue: 948
-    },
-    {
-      id: 3,
-      name: "Michael Chen",
-      email: "admin@digitalmarketing.com",
-      company: "Digital Marketing Pro",
-      address_street: "789 Marketing Blvd",
-      address_city: "New York",
-      address_state: "NY",
-      address_zip: "10001",
-      address_country: "USA",
-      status: "trial",
-      created_at: "2025-01-01",
-      total_revenue: 0
-    },
-    {
-      id: 4,
-      name: "Emily Rodriguez",
-      email: "billing@ecommerceplus.com",
-      company: "E-commerce Plus",
-      address_street: "321 Commerce Dr",
-      address_city: "Miami",
-      address_state: "FL",
-      address_zip: "33101",
-      address_country: "USA",
-      status: "active",
-      created_at: "2024-06-10",
-      total_revenue: 203
-    },
-    {
-      id: 5,
-      name: "David Kim",
-      email: "accounts@cloudsync.tech",
-      company: "CloudSync Technologies",
-      address_street: "555 Cloud Lane",
-      address_city: "Seattle",
-      address_state: "WA",
-      address_zip: "98101",
-      address_country: "USA",
-      status: "active",
-      created_at: "2024-02-28",
-      total_revenue: 2189
-    }
-  ],
-  subscriptions: [
-    {
-      id: 1,
-      customer_id: 1,
-      plan_name: "Enterprise",
-      plan_price: 199,
-      billing_cycle: "monthly",
-      status: "active",
-      start_date: "2024-01-15",
-      next_billing_date: "2025-02-15",
-      trial_start: null,
-      trial_end: null,
-      created_at: "2024-01-15"
-    },
-    {
-      id: 2,
-      customer_id: 2,
-      plan_name: "Pro",
-      plan_price: 79,
-      billing_cycle: "monthly",
-      status: "active",
-      start_date: "2024-03-22",
-      next_billing_date: "2025-02-10",
-      trial_start: null,
-      trial_end: null,
-      created_at: "2024-03-22"
-    },
-    {
-      id: 3,
-      customer_id: 3,
-      plan_name: "Pro",
-      plan_price: 79,
-      billing_cycle: "monthly",
-      status: "trial",
-      start_date: "2025-01-01",
-      next_billing_date: "2025-01-31",
-      trial_start: "2025-01-01",
-      trial_end: "2025-01-31",
-      created_at: "2025-01-01"
-    },
-    {
-      id: 4,
-      customer_id: 4,
-      plan_name: "Basic",
-      plan_price: 29,
-      billing_cycle: "monthly",
-      status: "active",
-      start_date: "2024-06-10",
-      next_billing_date: "2025-02-12",
-      trial_start: null,
-      trial_end: null,
-      created_at: "2024-06-10"
-    },
-    {
-      id: 5,
-      customer_id: 5,
-      plan_name: "Enterprise",
-      plan_price: 199,
-      billing_cycle: "monthly",
-      status: "active",
-      start_date: "2024-02-28",
-      next_billing_date: "2025-02-14",
-      trial_start: null,
-      trial_end: null,
-      created_at: "2024-02-28"
-    }
-  ],
-  invoices: [
-    {
-      id: 1001,
-      customer_id: 1,
-      subscription_id: 1,
-      invoice_number: "INV-1001",
-      amount: 199,
-      tax_amount: 19.9,
-      total_amount: 218.9,
-      due_date: "2025-01-15",
-      status: "paid",
-      paid_at: "2025-01-15",
-      created_at: "2025-01-01"
-    },
-    {
-      id: 1002,
-      customer_id: 2,
-      subscription_id: 2,
-      invoice_number: "INV-1002",
-      amount: 79,
-      tax_amount: 7.9,
-      total_amount: 86.9,
-      due_date: "2025-01-10",
-      status: "paid",
-      paid_at: "2025-01-10",
-      created_at: "2024-12-27"
-    },
-    {
-      id: 1003,
-      customer_id: 4,
-      subscription_id: 4,
-      invoice_number: "INV-1003",
-      amount: 29,
-      tax_amount: 2.9,
-      total_amount: 31.9,
-      due_date: "2025-01-12",
-      status: "paid",
-      paid_at: "2025-01-12",
-      created_at: "2024-12-29"
-    },
-    {
-      id: 1004,
-      customer_id: 5,
-      subscription_id: 5,
-      invoice_number: "INV-1004",
-      amount: 199,
-      tax_amount: 19.9,
-      total_amount: 218.9,
-      due_date: "2025-01-14",
-      status: "overdue",
-      paid_at: null,
-      created_at: "2024-12-31"
-    },
-    {
-      id: 1005,
-      customer_id: 1,
-      subscription_id: 1,
-      invoice_number: "INV-1005",
-      amount: 199,
-      tax_amount: 19.9,
-      total_amount: 218.9,
-      due_date: "2025-02-15",
-      status: "sent",
-      paid_at: null,
-      created_at: "2025-01-15"
-    }
-  ],
-  payments: [
-    {
-      id: 2001,
-      customer_id: 1,
-      invoice_id: 1001,
-      amount: 218.9,
-      payment_method: "Credit Card",
-      payment_date: "2025-01-15",
-      transaction_reference: "txn_123abc",
-      status: "completed",
-      notes: "Automatic payment",
-      created_at: "2025-01-15"
-    },
-    {
-      id: 2002,
-      customer_id: 2,
-      invoice_id: 1002,
-      amount: 86.9,
-      payment_method: "Bank Transfer",
-      payment_date: "2025-01-10",
-      transaction_reference: "txn_456def",
-      status: "completed",
-      notes: "Manual payment",
-      created_at: "2025-01-10"
-    },
-    {
-      id: 2003,
-      customer_id: 4,
-      invoice_id: 1003,
-      amount: 31.9,
-      payment_method: "Credit Card",
-      payment_date: "2025-01-12",
-      transaction_reference: "txn_789ghi",
-      status: "completed",
-      notes: "Automatic payment",
-      created_at: "2025-01-12"
-    }
-  ]
+  customers: [],
+  subscriptions: [],
+  invoices: [],
+  payments: []
 };
+
+// Load Supabase from CDN
+function loadSupabase() {
+  if (typeof supabase === 'undefined') {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+    script.onload = () => {
+      window.supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      console.log('✅ Supabase client initialized');
+    };
+    document.head.appendChild(script);
+  }
+}
 
 // DOM Manipulation Functions
 function showPage(pageId) {
-  // Hide all pages
   document.querySelectorAll('.page').forEach(page => {
     page.classList.remove('active');
   });
-  
-  // Show selected page
   document.getElementById(pageId).classList.add('active');
 }
 
 function showDashboard() {
   showPage('dashboardPage');
   showDashboardSection('overview');
+  loadDashboardStats();
   initializeCharts();
 }
-
 function showDashboardSection(sectionId) {
-  // Update navigation
   document.querySelectorAll('.nav-item').forEach(item => {
     item.classList.remove('active');
   });
   
-  // Hide all sections
   document.querySelectorAll('.dashboard-section').forEach(section => {
     section.classList.remove('active');
   });
   
-  // Show selected section
   document.getElementById(sectionId).classList.add('active');
   
-  // Update active nav item
   event?.target.closest('.nav-item')?.classList.add('active');
   
-  // Load section-specific data
   switch(sectionId) {
+    case 'overview':
+      loadDashboardStats(); // ✅ ADD THIS LINE
+      break;
     case 'customers':
       loadCustomersTable();
       break;
@@ -307,6 +86,7 @@ function showDashboardSection(sectionId) {
   
   currentSection = sectionId;
 }
+
 
 // Authentication Functions
 function showLogin() {
@@ -337,102 +117,216 @@ function logout() {
   showNotification('Logged out successfully', 'info');
 }
 
+// LOAD DYNAMIC DASHBOARD STATS
+async function loadDashboardStats() {
+  try {
+    console.log('📊 Loading dashboard stats...');
+    const response = await fetch('/api/dashboard/stats');
+    const result = await response.json();
+    
+    if (result.success) {
+      dashboardStats = result.data;
+      updateDashboardDisplay();
+      console.log('✅ Dashboard stats loaded:', dashboardStats);
+    } else {
+      console.error('❌ Failed to load dashboard stats:', result.error);
+      showNotification('Failed to load dashboard stats', 'error');
+    }
+  } catch (error) {
+    console.error('❌ Error loading dashboard stats:', error);
+    showNotification('Error loading dashboard stats', 'error');
+  }
+}
+
+// UPDATE DASHBOARD DISPLAY WITH REAL DATA
+function updateDashboardDisplay() {
+  console.log('🔄 Updating dashboard display with stats:', dashboardStats);
+  
+  // Update metric cards using the correct selectors
+  const totalCustomersElement = document.querySelector('.metric-value[data-label="customers"]');
+  const activeSubscriptionsElement = document.querySelector('.metric-value[data-label="subscriptions"]');
+  const monthlyRevenueElement = document.querySelector('.metric-value[data-label="revenue"]');
+  const overdueAmountElement = document.querySelector('.metric-value[data-label="overdue"]');
+  
+  console.log('Found elements:', {
+    customers: totalCustomersElement,
+    subscriptions: activeSubscriptionsElement,
+    revenue: monthlyRevenueElement,
+    overdue: overdueAmountElement
+  });
+  
+  if (totalCustomersElement) {
+    totalCustomersElement.textContent = dashboardStats.totalCustomers;
+    console.log('✅ Updated customers:', dashboardStats.totalCustomers);
+  }
+  if (activeSubscriptionsElement) {
+    activeSubscriptionsElement.textContent = dashboardStats.activeSubscriptions;
+    console.log('✅ Updated subscriptions:', dashboardStats.activeSubscriptions);
+  }
+  if (monthlyRevenueElement) {
+    monthlyRevenueElement.textContent = `$${dashboardStats.monthlyRevenue}`;
+    console.log('✅ Updated revenue:', `$${dashboardStats.monthlyRevenue}`);
+  }
+  if (overdueAmountElement) {
+    overdueAmountElement.textContent = `$${dashboardStats.overdueAmount}`;
+    console.log('✅ Updated overdue:', `$${dashboardStats.overdueAmount}`);
+  }
+  
+  // Fallback: If elements don't have data-label, find by other means
+  const metricValues = document.querySelectorAll('.metric-value');
+  if (metricValues.length >= 4) {
+    metricValues[0].textContent = dashboardStats.totalCustomers;
+    metricValues[1].textContent = dashboardStats.activeSubscriptions;  
+    metricValues[2].textContent = `$${dashboardStats.monthlyRevenue}`;
+    metricValues[3].textContent = `$${dashboardStats.overdueAmount}`;
+    console.log('✅ Updated via fallback method');
+  }
+}
+
 // Data Loading Functions
-function loadCustomersTable() {
-  const tbody = document.getElementById('customersTableBody');
-  tbody.innerHTML = '';
-  
-  appData.customers.forEach(customer => {
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td>${customer.name}</td>
-      <td>${customer.email}</td>
-      <td>${customer.company || '-'}</td>
-      <td><span class="status-badge status-${customer.status}">${customer.status}</span></td>
-      <td>$${customer.total_revenue}</td>
-      <td>
-        <div class="action-buttons">
-          <button class="action-btn action-btn--edit" onclick="editCustomer(${customer.id})">Edit</button>
-          <button class="action-btn action-btn--delete" onclick="deleteCustomer(${customer.id})">Delete</button>
-        </div>
-      </td>
-    `;
-    tbody.appendChild(row);
-  });
+async function loadCustomersTable() {
+  try {
+    console.log('📥 Loading customers...');
+    const response = await fetch('/api/customers');
+    const result = await response.json();
+    
+    const tbody = document.getElementById('customersTableBody');
+    tbody.innerHTML = '';
+    
+    if (result.success && result.data) {
+      appData.customers = result.data;
+      result.data.forEach(customer => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${customer.name}</td>
+          <td>${customer.email}</td>
+          <td>${customer.company || '-'}</td>
+          <td><span class="status-badge status-${customer.status}">${customer.status}</span></td>
+          <td>$${customer.total_revenue || 0}</td>
+          <td>
+            <div class="action-buttons">
+              <button class="action-btn action-btn--edit" onclick="editCustomer(${customer.id})">Edit</button>
+              <button class="action-btn action-btn--delete" onclick="deleteCustomer(${customer.id})">Delete</button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+      console.log(`✅ Loaded ${result.data.length} customers`);
+    }
+  } catch (error) {
+    console.error('❌ Error loading customers:', error);
+    showNotification('Error loading customers', 'error');
+  }
 }
 
-function loadSubscriptionsTable() {
-  const tbody = document.getElementById('subscriptionsTableBody');
-  tbody.innerHTML = '';
-  
-  appData.subscriptions.forEach(subscription => {
-    const customer = appData.customers.find(c => c.id === subscription.customer_id);
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td>${customer ? customer.name : 'Unknown'}</td>
-      <td>${subscription.plan_name}</td>
-      <td>$${subscription.plan_price}</td>
-      <td>${subscription.billing_cycle}</td>
-      <td><span class="status-badge status-${subscription.status}">${subscription.status}</span></td>
-      <td>${subscription.next_billing_date}</td>
-      <td>
-        <div class="action-buttons">
-          <button class="action-btn action-btn--edit" onclick="editSubscription(${subscription.id})">Edit</button>
-          <button class="action-btn action-btn--delete" onclick="cancelSubscription(${subscription.id})">Cancel</button>
-        </div>
-      </td>
-    `;
-    tbody.appendChild(row);
-  });
+async function loadSubscriptionsTable() {
+  try {
+    console.log('📥 Loading subscriptions...');
+    const response = await fetch('/api/subscriptions');
+    const result = await response.json();
+    
+    const tbody = document.getElementById('subscriptionsTableBody');
+    tbody.innerHTML = '';
+    
+    if (result.success && result.data) {
+      appData.subscriptions = result.data;
+      result.data.forEach(subscription => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${subscription.customer_name || 'Unknown'}</td>
+          <td>${subscription.plan_name}</td>
+          <td>$${subscription.plan_price}</td>
+          <td>${subscription.billing_cycle}</td>
+          <td><span class="status-badge status-${subscription.status}">${subscription.status}</span></td>
+          <td>${subscription.next_billing_date || '-'}</td>
+          <td>
+            <div class="action-buttons">
+              <button class="action-btn action-btn--edit" onclick="editSubscription(${subscription.id})">Edit</button>
+              <button class="action-btn action-btn--delete" onclick="cancelSubscription(${subscription.id})">Cancel</button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+      console.log(`✅ Loaded ${result.data.length} subscriptions`);
+    }
+  } catch (error) {
+    console.error('❌ Error loading subscriptions:', error);
+    showNotification('Error loading subscriptions', 'error');
+  }
 }
 
-function loadInvoicesTable() {
-  const tbody = document.getElementById('invoicesTableBody');
-  tbody.innerHTML = '';
-  
-  appData.invoices.forEach(invoice => {
-    const customer = appData.customers.find(c => c.id === invoice.customer_id);
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td>${invoice.invoice_number}</td>
-      <td>${customer ? customer.name : 'Unknown'}</td>
-      <td>$${invoice.total_amount}</td>
-      <td>${invoice.due_date}</td>
-      <td><span class="status-badge status-${invoice.status}">${invoice.status}</span></td>
-      <td>
-        <div class="action-buttons">
-          <button class="action-btn action-btn--edit" onclick="viewInvoice(${invoice.id})">View</button>
-          ${invoice.status !== 'paid' ? `<button class="action-btn action-btn--edit" onclick="recordPayment(${invoice.id})">Pay</button>` : ''}
-        </div>
-      </td>
-    `;
-    tbody.appendChild(row);
-  });
+async function loadInvoicesTable() {
+  try {
+    console.log('📥 Loading invoices...');
+    const response = await fetch('/api/invoices');
+    const result = await response.json();
+    
+    const tbody = document.getElementById('invoicesTableBody');
+    tbody.innerHTML = '';
+    
+    if (result.success && result.data) {
+      appData.invoices = result.data;
+      result.data.forEach(invoice => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${invoice.invoice_number}</td>
+          <td>${invoice.customer_name || 'Unknown'}</td>
+          <td>$${invoice.total_amount}</td>
+          <td>${invoice.due_date}</td>
+          <td><span class="status-badge status-${invoice.status}">${invoice.status}</span></td>
+          <td>
+            <div class="action-buttons">
+              <button class="action-btn action-btn--edit" onclick="viewInvoice(${invoice.id})">View</button>
+              ${invoice.status !== 'paid' ? `<button class="action-btn action-btn--success" onclick="recordPayment(${invoice.id})">Pay</button>` : ''}
+            </div>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+      console.log(`✅ Loaded ${result.data.length} invoices`);
+    }
+  } catch (error) {
+    console.error('❌ Error loading invoices:', error);
+    showNotification('Error loading invoices', 'error');
+  }
 }
 
-function loadPaymentsTable() {
-  const tbody = document.getElementById('paymentsTableBody');
-  tbody.innerHTML = '';
-  
-  appData.payments.forEach(payment => {
-    const customer = appData.customers.find(c => c.id === payment.customer_id);
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td>${customer ? customer.name : 'Unknown'}</td>
-      <td>$${payment.amount}</td>
-      <td>${payment.payment_method}</td>
-      <td>${payment.payment_date}</td>
-      <td><span class="status-badge status-${payment.status}">${payment.status}</span></td>
-      <td>${payment.transaction_reference}</td>
-    `;
-    tbody.appendChild(row);
-  });
+async function loadPaymentsTable() {
+  try {
+    console.log('📥 Loading payments...');
+    const response = await fetch('/api/payments');
+    const result = await response.json();
+    
+    const tbody = document.getElementById('paymentsTableBody');
+    tbody.innerHTML = '';
+    
+    if (result.success && result.data) {
+      appData.payments = result.data;
+      result.data.forEach(payment => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${payment.customer_name || 'Unknown'}</td>
+          <td>$${payment.amount}</td>
+          <td>${payment.payment_method}</td>
+          <td>${payment.payment_date}</td>
+          <td><span class="status-badge status-${payment.status}">${payment.status}</span></td>
+          <td>${payment.transaction_reference || '-'}</td>
+        `;
+        tbody.appendChild(row);
+      });
+      console.log(`✅ Loaded ${result.data.length} payments`);
+    }
+  } catch (error) {
+    console.error('❌ Error loading payments:', error);
+    showNotification('Error loading payments', 'error');
+  }
 }
 
 // Modal Functions
 function openCustomerModal() {
   document.getElementById('customerModal').classList.add('active');
-  populateCustomerDropdowns();
 }
 
 function openSubscriptionModal() {
@@ -441,25 +335,99 @@ function openSubscriptionModal() {
 }
 
 function openInvoiceModal() {
-  // Would open invoice modal if implemented
-  showNotification('Invoice creation coming soon!', 'info');
+  document.getElementById('invoiceModal').classList.add('active');
+  populateCustomerDropdowns();
+  populateSubscriptionDropdowns();
 }
 
 function openPaymentModal() {
-  // Would open payment modal if implemented
-  showNotification('Payment recording coming soon!', 'info');
+  document.getElementById('paymentModal').classList.add('active');
+  populateCustomerDropdowns();
+  populateInvoiceDropdowns();
 }
 
-function populateCustomerDropdowns() {
-  const customerSelect = document.getElementById('subscriptionCustomer');
-  if (customerSelect) {
-    customerSelect.innerHTML = '<option value="">Select Customer</option>';
-    appData.customers.forEach(customer => {
-      const option = document.createElement('option');
-      option.value = customer.id;
-      option.textContent = customer.name;
-      customerSelect.appendChild(option);
-    });
+async function populateCustomerDropdowns() {
+  try {
+    const response = await fetch('/api/customers');
+    const result = await response.json();
+    
+    // For subscriptions
+    const subscriptionCustomerSelect = document.getElementById('subscriptionCustomer');
+    if (subscriptionCustomerSelect && result.success && result.data) {
+      subscriptionCustomerSelect.innerHTML = '<option value="">Select Customer</option>';
+      result.data.forEach(customer => {
+        const option = document.createElement('option');
+        option.value = customer.id;
+        option.textContent = `${customer.name} (${customer.email})`;
+        subscriptionCustomerSelect.appendChild(option);
+      });
+    }
+    
+    // For invoices
+    const invoiceCustomerSelect = document.getElementById('invoiceCustomer');
+    if (invoiceCustomerSelect && result.success && result.data) {
+      invoiceCustomerSelect.innerHTML = '<option value="">Select Customer</option>';
+      result.data.forEach(customer => {
+        const option = document.createElement('option');
+        option.value = customer.id;
+        option.textContent = `${customer.name} (${customer.email})`;
+        invoiceCustomerSelect.appendChild(option);
+      });
+    }
+    
+    // For payments
+    const paymentCustomerSelect = document.getElementById('paymentCustomer');
+    if (paymentCustomerSelect && result.success && result.data) {
+      paymentCustomerSelect.innerHTML = '<option value="">Select Customer</option>';
+      result.data.forEach(customer => {
+        const option = document.createElement('option');
+        option.value = customer.id;
+        option.textContent = `${customer.name} (${customer.email})`;
+        paymentCustomerSelect.appendChild(option);
+      });
+    }
+  } catch (error) {
+    console.error('❌ Error loading customers for dropdown:', error);
+  }
+}
+
+async function populateSubscriptionDropdowns() {
+  try {
+    const response = await fetch('/api/subscriptions');
+    const result = await response.json();
+    
+    const subscriptionSelect = document.getElementById('invoiceSubscription');
+    if (subscriptionSelect && result.success && result.data) {
+      subscriptionSelect.innerHTML = '<option value="">Select Subscription (Optional)</option>';
+      result.data.forEach(subscription => {
+        const option = document.createElement('option');
+        option.value = subscription.id;
+        option.textContent = `${subscription.customer_name} - ${subscription.plan_name}`;
+        subscriptionSelect.appendChild(option);
+      });
+    }
+  } catch (error) {
+    console.error('❌ Error loading subscriptions for dropdown:', error);
+  }
+}
+
+async function populateInvoiceDropdowns() {
+  try {
+    const response = await fetch('/api/invoices');
+    const result = await response.json();
+    
+    const invoiceSelect = document.getElementById('paymentInvoice');
+    if (invoiceSelect && result.success && result.data) {
+      invoiceSelect.innerHTML = '<option value="">Select Invoice (Optional)</option>';
+      result.data.filter(invoice => invoice.status !== 'paid').forEach(invoice => {
+        const option = document.createElement('option');
+        option.value = invoice.id;
+        option.textContent = `${invoice.invoice_number} - $${invoice.total_amount}`;
+        invoiceSelect.appendChild(option);
+      });
+    }
+  } catch (error) {
+    console.error('❌ Error loading invoices for dropdown:', error);
   }
 }
 
@@ -467,7 +435,6 @@ function populateCustomerDropdowns() {
 function editCustomer(id) {
   const customer = appData.customers.find(c => c.id === id);
   if (customer) {
-    // Populate form with customer data
     document.getElementById('customerName').value = customer.name;
     document.getElementById('customerEmail').value = customer.email;
     document.getElementById('customerCompany').value = customer.company || '';
@@ -481,11 +448,26 @@ function editCustomer(id) {
   }
 }
 
-function deleteCustomer(id) {
+async function deleteCustomer(id) {
   if (confirm('Are you sure you want to delete this customer?')) {
-    appData.customers = appData.customers.filter(c => c.id !== id);
-    loadCustomersTable();
-    showNotification('Customer deleted successfully', 'success');
+    try {
+      const response = await fetch(`/api/customers/${id}`, {
+        method: 'DELETE'
+      });
+      
+      const result = await response.json();
+      
+      if (result.success) {
+        await loadCustomersTable();
+        await loadDashboardStats(); // Refresh dashboard
+        showNotification('Customer deleted successfully', 'success');
+      } else {
+        showNotification(result.error || 'Failed to delete customer', 'error');
+      }
+    } catch (error) {
+      console.error('❌ Error deleting customer:', error);
+      showNotification('Error deleting customer', 'error');
+    }
   }
 }
 
@@ -499,201 +481,56 @@ function cancelSubscription(id) {
     if (subscription) {
       subscription.status = 'cancelled';
       loadSubscriptionsTable();
+      loadDashboardStats(); // Refresh dashboard
       showNotification('Subscription cancelled successfully', 'success');
     }
   }
 }
 
 function viewInvoice(id) {
-  showNotification('Invoice viewer coming soon!', 'info');
-}
-
-function recordPayment(id) {
   const invoice = appData.invoices.find(i => i.id === id);
-  if (invoice && confirm(`Record payment of $${invoice.total_amount} for ${invoice.invoice_number}?`)) {
-    // Create payment record
-    const payment = {
-      id: Math.max(...appData.payments.map(p => p.id)) + 1,
-      customer_id: invoice.customer_id,
-      invoice_id: invoice.id,
-      amount: invoice.total_amount,
-      payment_method: 'Manual Entry',
-      payment_date: new Date().toISOString().split('T')[0],
-      transaction_reference: `TXN-${Date.now()}`,
-      status: 'completed',
-      notes: 'Manual payment entry',
-      created_at: new Date().toISOString().split('T')[0]
-    };
-    
-    appData.payments.push(payment);
-    invoice.status = 'paid';
-    invoice.paid_at = new Date().toISOString().split('T')[0];
-    
-    loadInvoicesTable();
-    showNotification('Payment recorded successfully', 'success');
+  if (invoice) {
+    alert(`Invoice Details:\n\nNumber: ${invoice.invoice_number}\nAmount: $${invoice.total_amount}\nDue Date: ${invoice.due_date}\nStatus: ${invoice.status}`);
   }
 }
 
-// Form Handlers
-document.addEventListener('DOMContentLoaded', function() {
-  // Login Form
-  document.getElementById('loginForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    const email = document.getElementById('loginEmail').value;
-    const password = document.getElementById('loginPassword').value;
-    
+async function recordPayment(invoiceId) {
+  const invoice = appData.invoices.find(i => i.id === invoiceId);
+  if (!invoice) {
+    showNotification('Invoice not found', 'error');
+    return;
+  }
+  
+  if (confirm(`Record payment of $${invoice.total_amount} for ${invoice.invoice_number}?`)) {
     try {
-      // Simulate API call
-      const response = await fetch('/api/auth/login', {
+      const response = await fetch('/api/payments', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          customer_id: invoice.customer_id,
+          invoice_id: invoice.id,
+          amount: invoice.total_amount,
+          payment_method: 'manual',
+          notes: `Payment for ${invoice.invoice_number}`
+        })
       });
       
-      const data = await response.json();
+      const result = await response.json();
       
-      if (data.success) {
-        currentUser = data.user;
-        closeModal('loginModal');
-        showDashboard();
-        showNotification('Login successful!', 'success');
+      if (result.success) {
+        await loadInvoicesTable();
+        await loadPaymentsTable();
+        await loadDashboardStats(); // Refresh dashboard
+        showNotification('Payment recorded successfully', 'success');
       } else {
-        showNotification('Login failed. Please try again.', 'error');
+        showNotification(result.error || 'Failed to record payment', 'error');
       }
     } catch (error) {
-      // Fallback for demo
-      currentUser = { id: 1, name: 'Demo User', email: email };
-      closeModal('loginModal');
-      showDashboard();
-      showNotification('Login successful! (Demo Mode)', 'success');
+      console.error('❌ Error recording payment:', error);
+      showNotification('Error recording payment', 'error');
     }
-  });
-  
-  // Signup Form
-  document.getElementById('signupForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    const name = document.getElementById('signupName').value;
-    const email = document.getElementById('signupEmail').value;
-    const company = document.getElementById('signupCompany').value;
-    const password = document.getElementById('signupPassword').value;
-    
-    try {
-      // Simulate API call
-      const response = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, email, company, password })
-      });
-      
-      const data = await response.json();
-      
-      if (data.success) {
-        currentUser = data.user;
-        closeModal('signupModal');
-        showDashboard();
-        showNotification('Account created successfully!', 'success');
-      } else {
-        showNotification('Registration failed. Please try again.', 'error');
-      }
-    } catch (error) {
-      // Fallback for demo
-      currentUser = { id: 1, name: name, email: email, company: company };
-      closeModal('signupModal');
-      showDashboard();
-      showNotification('Account created successfully! (Demo Mode)', 'success');
-    }
-  });
-  
-  // Customer Form
-  document.getElementById('customerForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const customerData = {
-      name: document.getElementById('customerName').value,
-      email: document.getElementById('customerEmail').value,
-      company: document.getElementById('customerCompany').value,
-      address_street: document.getElementById('customerStreet').value,
-      address_city: document.getElementById('customerCity').value,
-      address_state: document.getElementById('customerState').value,
-      address_zip: document.getElementById('customerZip').value,
-      address_country: 'USA',
-      status: 'active',
-      created_at: new Date().toISOString().split('T')[0],
-      total_revenue: 0
-    };
-    
-    // Add or update customer
-    if (document.getElementById('customerModalTitle').textContent === 'Edit Customer') {
-      // Update existing customer
-      const index = appData.customers.findIndex(c => c.email === customerData.email);
-      if (index !== -1) {
-        customerData.id = appData.customers[index].id;
-        customerData.total_revenue = appData.customers[index].total_revenue;
-        appData.customers[index] = customerData;
-      }
-    } else {
-      // Add new customer
-      customerData.id = Math.max(...appData.customers.map(c => c.id)) + 1;
-      appData.customers.push(customerData);
-    }
-    
-    closeModal('customerModal');
-    loadCustomersTable();
-    showNotification('Customer saved successfully!', 'success');
-    
-    // Reset form
-    document.getElementById('customerForm').reset();
-    document.getElementById('customerModalTitle').textContent = 'Add New Customer';
-  });
-  
-  // Subscription Form
-  document.getElementById('subscriptionForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const subscriptionData = {
-      id: Math.max(...appData.subscriptions.map(s => s.id)) + 1,
-      customer_id: parseInt(document.getElementById('subscriptionCustomer').value),
-      plan_name: document.getElementById('subscriptionPlan').value,
-      plan_price: parseFloat(document.getElementById('subscriptionAmount').value),
-      billing_cycle: document.getElementById('subscriptionCycle').value,
-      status: document.getElementById('subscriptionTrial').checked ? 'trial' : 'active',
-      start_date: document.getElementById('subscriptionStartDate').value,
-      next_billing_date: calculateNextBilling(document.getElementById('subscriptionStartDate').value, document.getElementById('subscriptionCycle').value),
-      trial_start: document.getElementById('subscriptionTrial').checked ? document.getElementById('trialStart').value : null,
-      trial_end: document.getElementById('subscriptionTrial').checked ? document.getElementById('trialEnd').value : null,
-      created_at: new Date().toISOString().split('T')[0]
-    };
-    
-    appData.subscriptions.push(subscriptionData);
-    closeModal('subscriptionModal');
-    loadSubscriptionsTable();
-    showNotification('Subscription created successfully!', 'success');
-    
-    // Reset form
-    document.getElementById('subscriptionForm').reset();
-  });
-  
-  // Plan selection change handler
-  document.getElementById('subscriptionPlan').addEventListener('change', function() {
-    const selectedOption = this.selectedOptions[0];
-    if (selectedOption) {
-      const price = selectedOption.dataset.price;
-      document.getElementById('subscriptionAmount').value = price;
-    }
-  });
-  
-  // Trial checkbox handler
-  document.getElementById('subscriptionTrial').addEventListener('change', function() {
-    const trialFields = document.getElementById('trialFields');
-    trialFields.style.display = this.checked ? 'block' : 'none';
-  });
-});
+  }
+}
 
 // Utility Functions
 function calculateNextBilling(startDate, cycle) {
@@ -719,7 +556,6 @@ function showNotification(message, type = 'info') {
   
   document.getElementById('notifications').appendChild(notification);
   
-  // Auto remove after 5 seconds
   setTimeout(() => {
     notification.remove();
   }, 5000);
@@ -727,7 +563,7 @@ function showNotification(message, type = 'info') {
 
 // Charts Initialization
 function initializeCharts() {
-  // Revenue Chart
+  // Revenue Chart with dynamic data
   const revenueCtx = document.getElementById('revenueChart');
   if (revenueCtx) {
     new Chart(revenueCtx, {
@@ -736,7 +572,7 @@ function initializeCharts() {
         labels: ['Sep', 'Oct', 'Nov', 'Dec', 'Jan'],
         datasets: [{
           label: 'Monthly Revenue',
-          data: [380, 420, 465, 489, 506],
+          data: [0, 0, 0, 0, dashboardStats.monthlyRevenue],
           borderColor: '#8b5cf6',
           backgroundColor: 'rgba(139, 92, 246, 0.1)',
           tension: 0.4,
@@ -764,7 +600,7 @@ function initializeCharts() {
     });
   }
   
-  // Subscription Chart
+  // Subscription Chart with dynamic data
   const subscriptionCtx = document.getElementById('subscriptionChart');
   if (subscriptionCtx) {
     new Chart(subscriptionCtx, {
@@ -772,7 +608,7 @@ function initializeCharts() {
       data: {
         labels: ['Active', 'Trial', 'Cancelled'],
         datasets: [{
-          data: [4, 1, 0],
+          data: [dashboardStats.activeSubscriptions, 0, 0],
           backgroundColor: ['#10b981', '#f59e0b', '#ef4444']
         }]
       },
@@ -788,9 +624,8 @@ function initializeCharts() {
   }
 }
 
-// Load reports
 function loadReports() {
-  // Revenue Report Chart
+  // Revenue Report Chart with dynamic data
   const revenueReportCtx = document.getElementById('revenueReportChart');
   if (revenueReportCtx) {
     new Chart(revenueReportCtx, {
@@ -799,7 +634,7 @@ function loadReports() {
         labels: ['Sep', 'Oct', 'Nov', 'Dec', 'Jan'],
         datasets: [{
           label: 'Monthly Revenue',
-          data: [380, 420, 465, 489, 506],
+          data: [0, 0, 0, 0, dashboardStats.monthlyRevenue],
           backgroundColor: '#8b5cf6'
         }]
       },
@@ -831,7 +666,7 @@ function loadReports() {
         labels: ['Sep', 'Oct', 'Nov', 'Dec', 'Jan'],
         datasets: [{
           label: 'Total Customers',
-          data: [18, 22, 25, 28, 32],
+          data: [0, 0, 0, 0, dashboardStats.totalCustomers],
           borderColor: '#3b82f6',
           backgroundColor: 'rgba(59, 130, 246, 0.1)',
           tension: 0.4,
@@ -856,32 +691,10 @@ function loadReports() {
       }
     });
   }
-  
-  // Overdue Invoices List
-  const overdueList = document.getElementById('overdueInvoicesList');
-  if (overdueList) {
-    const overdueInvoices = appData.invoices.filter(inv => inv.status === 'overdue');
-    
-    if (overdueInvoices.length === 0) {
-      overdueList.innerHTML = '<p style="color: #10b981;">No overdue invoices! 🎉</p>';
-    } else {
-      overdueList.innerHTML = overdueInvoices.map(invoice => {
-        const customer = appData.customers.find(c => c.id === invoice.customer_id);
-        return `
-          <div style="padding: 10px; background: var(--bg-primary); border-radius: 4px; margin-bottom: 8px;">
-            <div style="font-weight: 600; color: var(--text-primary);">${invoice.invoice_number}</div>
-            <div style="color: var(--text-secondary); font-size: 0.875rem;">${customer?.name || 'Unknown Customer'}</div>
-            <div style="color: var(--error-color); font-weight: 500;">$${invoice.total_amount} - Due: ${invoice.due_date}</div>
-          </div>
-        `;
-      }).join('');
-    }
-  }
 }
 
 // Animation Functions
 function initializeAnimations() {
-  // Scroll animations
   const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -898,48 +711,255 @@ function initializeAnimations() {
   document.querySelectorAll('.reveal-on-scroll').forEach(el => {
     observer.observe(el);
   });
-  
-  // Stats counter animation
-  function animateCounters() {
-    const counters = document.querySelectorAll('.stat-number');
-    counters.forEach(counter => {
-      const target = parseInt(counter.getAttribute('data-target'));
-      const increment = target / 100;
-      let current = 0;
-      
-      const updateCounter = () => {
-        if (current < target) {
-          current += increment;
-          counter.textContent = Math.floor(current);
-          requestAnimationFrame(updateCounter);
-        } else {
-          counter.textContent = target;
-        }
-      };
-      
-      updateCounter();
-    });
-  }
-  
-  // Start counter animation when stats section is visible
-  const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateCounters();
-        statsObserver.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-  
-  const statsSection = document.querySelector('.stats-section');
-  if (statsSection) {
-    statsObserver.observe(statsSection);
-  }
 }
 
 // Initialize app
 document.addEventListener('DOMContentLoaded', function() {
+  console.log('🚀 Initializing BILLZ Application - Full Dynamic Version...');
+  
+  loadSupabase();
   initializeAnimations();
+  
+  // ===== FORM HANDLERS =====
+  
+  // Login Form
+  document.getElementById('loginForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        currentUser = data.user;
+        closeModal('loginModal');
+        showDashboard();
+        showNotification('Login successful!', 'success');
+      } else {
+        showNotification(data.error || 'Login failed', 'error');
+      }
+    } catch (error) {
+      console.error('❌ Login error:', error);
+      showNotification('Login failed: ' + error.message, 'error');
+    }
+  });
+  
+  // Signup Form
+  document.getElementById('signupForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('signupName').value;
+    const email = document.getElementById('signupEmail').value;
+    const company = document.getElementById('signupCompany').value;
+    const password = document.getElementById('signupPassword').value;
+    
+    try {
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, company, password })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        currentUser = data.user;
+        closeModal('signupModal');
+        showDashboard();
+        showNotification('Account created successfully!', 'success');
+      } else {
+        showNotification(data.error || 'Registration failed', 'error');
+      }
+    } catch (error) {
+      console.error('❌ Registration error:', error);
+      showNotification('Registration failed: ' + error.message, 'error');
+    }
+  });
+  
+  // Customer Form
+  document.getElementById('customerForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const customerData = {
+      name: document.getElementById('customerName').value,
+      email: document.getElementById('customerEmail').value,
+      company: document.getElementById('customerCompany').value,
+      address_street: document.getElementById('customerStreet').value,
+      address_city: document.getElementById('customerCity').value,
+      address_state: document.getElementById('customerState').value,
+      address_zip: document.getElementById('customerZip').value
+    };
+    
+    try {
+      const response = await fetch('/api/customers', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(customerData)
+      });
+      
+      const result = await response.json();
+      
+      if (result.success) {
+        closeModal('customerModal');
+        await loadCustomersTable();
+        await loadDashboardStats(); // Refresh dashboard stats
+        showNotification('Customer saved successfully!', 'success');
+        document.getElementById('customerForm').reset();
+        document.getElementById('customerModalTitle').textContent = 'Add New Customer';
+      } else {
+        showNotification(result.error || 'Failed to save customer', 'error');
+      }
+    } catch (error) {
+      console.error('❌ Error saving customer:', error);
+      showNotification('Error saving customer', 'error');
+    }
+  });
+  
+  // Subscription Form
+  document.getElementById('subscriptionForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const subscriptionData = {
+      customer_id: parseInt(document.getElementById('subscriptionCustomer').value),
+      plan_name: document.getElementById('subscriptionPlan').value,
+      plan_price: parseFloat(document.getElementById('subscriptionAmount').value),
+      billing_cycle: document.getElementById('subscriptionCycle').value,
+      status: document.getElementById('subscriptionTrial').checked ? 'trial' : 'active',
+      start_date: document.getElementById('subscriptionStartDate').value,
+      trial_start: document.getElementById('subscriptionTrial').checked ? document.getElementById('trialStart').value : null,
+      trial_end: document.getElementById('subscriptionTrial').checked ? document.getElementById('trialEnd').value : null
+    };
+    
+    try {
+      const response = await fetch('/api/subscriptions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(subscriptionData)
+      });
+      
+      const result = await response.json();
+      
+      if (result.success) {
+        closeModal('subscriptionModal');
+        await loadSubscriptionsTable();
+        await loadDashboardStats(); // Refresh dashboard stats
+        showNotification('Subscription created successfully!', 'success');
+        document.getElementById('subscriptionForm').reset();
+      } else {
+        showNotification(result.error || 'Failed to create subscription', 'error');
+      }
+    } catch (error) {
+      console.error('❌ Error creating subscription:', error);
+      showNotification('Error creating subscription', 'error');
+    }
+  });
+  
+  // Invoice Form
+  if (document.getElementById('invoiceForm')) {
+    document.getElementById('invoiceForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const invoiceData = {
+        customer_id: parseInt(document.getElementById('invoiceCustomer').value),
+        subscription_id: parseInt(document.getElementById('invoiceSubscription').value) || null,
+        amount: parseFloat(document.getElementById('invoiceAmount').value),
+        description: document.getElementById('invoiceDescription').value,
+        due_date: document.getElementById('invoiceDueDate').value
+      };
+      
+      try {
+        const response = await fetch('/api/invoices', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(invoiceData)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          closeModal('invoiceModal');
+          await loadInvoicesTable();
+          await loadDashboardStats(); // Refresh dashboard stats
+          showNotification('Invoice created successfully!', 'success');
+          document.getElementById('invoiceForm').reset();
+        } else {
+          showNotification(result.error || 'Failed to create invoice', 'error');
+        }
+      } catch (error) {
+        console.error('❌ Error creating invoice:', error);
+        showNotification('Error creating invoice', 'error');
+      }
+    });
+  }
+  
+  // Payment Form
+  if (document.getElementById('paymentForm')) {
+    document.getElementById('paymentForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const paymentData = {
+        customer_id: parseInt(document.getElementById('paymentCustomer').value),
+        invoice_id: parseInt(document.getElementById('paymentInvoice').value) || null,
+        amount: parseFloat(document.getElementById('paymentAmount').value),
+        payment_method: document.getElementById('paymentMethod').value,
+        payment_date: document.getElementById('paymentDate').value,
+        notes: document.getElementById('paymentNotes').value
+      };
+      
+      try {
+        const response = await fetch('/api/payments', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(paymentData)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          closeModal('paymentModal');
+          await loadPaymentsTable();
+          await loadInvoicesTable(); // Refresh invoices in case status changed
+          await loadDashboardStats(); // Refresh dashboard stats
+          showNotification('Payment recorded successfully!', 'success');
+          document.getElementById('paymentForm').reset();
+        } else {
+          showNotification(result.error || 'Failed to record payment', 'error');
+        }
+      } catch (error) {
+        console.error('❌ Error recording payment:', error);
+        showNotification('Error recording payment', 'error');
+      }
+    });
+  }
+  
+  // Plan selection change handler
+  if (document.getElementById('subscriptionPlan')) {
+    document.getElementById('subscriptionPlan').addEventListener('change', function() {
+      const selectedOption = this.selectedOptions[0];
+      if (selectedOption) {
+        const price = selectedOption.dataset.price;
+        document.getElementById('subscriptionAmount').value = price;
+      }
+    });
+  }
+  
+  // Trial checkbox handler
+  if (document.getElementById('subscriptionTrial')) {
+    document.getElementById('subscriptionTrial').addEventListener('change', function() {
+      const trialFields = document.getElementById('trialFields');
+      if (trialFields) {
+        trialFields.style.display = this.checked ? 'block' : 'none';
+      }
+    });
+  }
   
   // Close modals when clicking outside
   document.querySelectorAll('.modal').forEach(modal => {
@@ -950,7 +970,21 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
-  // Set default start date to today
+  // Set default dates
   const today = new Date().toISOString().split('T')[0];
-  document.getElementById('subscriptionStartDate').value = today;
+  if (document.getElementById('subscriptionStartDate')) {
+    document.getElementById('subscriptionStartDate').value = today;
+  }
+  if (document.getElementById('paymentDate')) {
+    document.getElementById('paymentDate').value = today;
+  }
+  
+  // Set default invoice due date (30 days from today)
+  if (document.getElementById('invoiceDueDate')) {
+    const dueDate = new Date();
+    dueDate.setDate(dueDate.getDate() + 30);
+    document.getElementById('invoiceDueDate').value = dueDate.toISOString().split('T')[0];
+  }
+  
+  console.log('✅ BILLZ Application initialized - Full Dynamic Version!');
 });
