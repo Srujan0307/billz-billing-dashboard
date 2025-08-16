@@ -11,6 +11,9 @@ Manage customers, create subscriptions, generate invoices, and track payments wi
 
 # 🚀 Getting Started
 
+
+
+
 # 🔑 Sign Up / Log In
 Use the auth pages to create an account and access the dashboard.
 
@@ -69,7 +72,7 @@ Tailwind CSS – Styling
 
 Vercel – Deployment
 
-3 Support
+# Support
 
 For support, email srujanjadhav@gmai.com or open an issue on GitHub.
 
