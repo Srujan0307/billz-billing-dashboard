@@ -805,6 +805,15 @@ input:focus, select:focus, textarea:focus {
     padding: var(--spacing-lg);
     border-radius: var(--radius-lg);
     border: 1px solid var(--border-color);
+    height: 400px; /* Fixed height */
+    min-height: 400px;
+    max-height: 400px;
+    overflow: hidden;
+}
+
+.chart-card canvas {
+    width: 100% !important;
+    height: 100% !important;
 }
 
 .chart-card h3 {
@@ -966,6 +975,15 @@ input:focus, select:focus, textarea:focus {
     padding: var(--spacing-lg);
     border-radius: var(--radius-lg);
     border: 1px solid var(--border-color);
+    height: 400px; /* Fixed height */
+    min-height: 400px;
+    max-height: 400px;
+    overflow: hidden;
+}
+
+.report-card canvas {
+    width: 100% !important;
+    height: 100% !important;
 }
 
 .report-card h3 {
